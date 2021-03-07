@@ -16,7 +16,7 @@ def test_negation():
 
     for A in (True, False):
         for B in (True, False):
-            for C in (True, False):ªõ-1
+            for C in (True, False):
                 assert initial_formula(A, B, C) == A or (C and not B)
 
 
