@@ -1,7 +1,7 @@
 from tkinter import *
-from random import sample
 from tkinter import messagebox
 
+from usecases import cast_str_to_list, generate
 
 
 def count_var(event):
@@ -45,33 +45,18 @@ def create_uni(event):
 
 
 def generate_a():
-    generate_from = int(uni_range[0])
-    generate_to = int(uni_range[1])
-    power_a = int(power[0])
-    entr_hand_A.insert(END, str(sample(range(generate_from, generate_to), power_a)).strip('[]'))
-    p = ((entr_hand_A.get()).split(','))
-    for i in p:
-        set_a.append(int(i))
+    generate(0, entr_hand_A)
+    cast_str_to_list(entr_hand_A, set_a)
 
 
 def generate_b():
-    generate_from = int(uni_range[0])
-    generate_to = int(uni_range[1])
-    power_b = int(power[1])
-    entr_hand_B.insert(END, str(sample(range(generate_from, generate_to), power_b)).strip('[]'))
-    e = ((entr_hand_B.get()).split(','))
-    for i in e:
-        set_b.append(int(i))
+    generate(1, entr_hand_B)
+    cast_str_to_list(entr_hand_B, set_b)
 
 
 def generate_c():
-    generate_from = int(uni_range[0])
-    generate_to = int(uni_range[1])
-    power_c = int(power[2])
-    entr_hand_C.insert(END, str(sample(range(generate_from, generate_to), power_c)).strip('[]'))
-    r = ((entr_hand_C.get()).split(','))
-    for i in r:
-        set_c.append(int(i))
+    generate(2, entr_hand_C)
+    cast_str_to_list(entr_hand_C, set_c)
 
 
 def save():
@@ -89,15 +74,10 @@ def save():
     frm = int(uni_range[0])
     for i in range(frm, to, 1):
         empty.append(i)
-    p = ((entr_hand_A.get()).split(','))
-    for i in p:
-        set_a.append(int(i))
-    e = ((entr_hand_B.get()).split(','))
-    for i in e:
-        set_b.append(int(i))
-    r = ((entr_hand_C.get()).split(','))
-    for i in r:
-        set_c.append(int(i))
+
+    cast_str_to_list(entr_hand_A, set_a)
+    cast_str_to_list(entr_hand_B, set_b)
+    cast_str_to_list(entr_hand_B, set_c)
 
 
 def u():
@@ -108,7 +88,7 @@ def u():
         return (str(empty)).strip('[]')
 
 
-def write_in_file(result):
+def write_to_file(result):
     with open('result.txt', 'a') as f:
         f.write(str(result))
         f.write('\n')
@@ -296,7 +276,7 @@ def create_win2():
     label_d.grid(row=10, column=0, sticky='w')
 
     save_but = Button(frame, text='Зберегти', font=('Garamond', 14), bg='light sea green',
-                      command=write_in_file(union5))
+                      command=write_to_file(union5))
     save_but.grid(row=11, columnspan=3)
 
 
@@ -357,7 +337,7 @@ def create_win3():
     label_d = Label(frame, bg='brown1', font=('Century Schoolbook', 14), text='D2=')
     label_d.grid(row=10, column=0, sticky='w')
 
-    save_but = Button(frame, text='Зберегти', font=('Garamond', 14), bg='tan1', command=write_in_file(union2))
+    save_but = Button(frame, text='Зберегти', font=('Garamond', 14), bg='tan1', command=write_to_file(union2))
     save_but.grid(row=11, columnspan=4)
 
 
@@ -420,7 +400,7 @@ def create_win4():
     label_z.grid(row=8, column=0, sticky='w')
 
     save_but = Button(frame, text='Зберегти', font=('Garamond', 14), bg='MediumOrchid1',
-                      command=(write_in_file(z)))
+                      command=(write_to_file(z)))
     save_but.grid(row=9, columnspan=4)
 
     if len(y) > 10:
@@ -448,7 +428,7 @@ def create_win5():
     y = set(empty) - set(set_a)
     z = set(x) ^ set(y)
 
-    write_in_file(z)
+    write_to_file(z)
 
     with open("result.txt", 'r+') as f:
         result = f.readlines()
