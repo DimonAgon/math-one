@@ -2,8 +2,14 @@ from tkinter import *
 from random import sample
 from tkinter import messagebox
 
-from count_variant import count_var
 
+
+def count_var(event):
+    n = 4
+    g = 23
+    n += 2
+    num = (n + g % 60) % 30 + 1
+    return var.config(text=('Варіант', num)), var_but.config(state=DISABLED)
 
 def power_func(event):
     power_a = (entr_pow_A.get()).split(' ')
