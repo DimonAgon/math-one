@@ -1,6 +1,12 @@
 
 
 
+
+def compute_simplified_formula(A, B, C):
+    b_diff_c = B - C
+    a_intersect_b_diff_c = A & b_diff_c
+    return a_intersect_b_diff_c
+
 def set_difference(X, Y):
     """# True \ False = True
 # True \ True = False
